@@ -5,7 +5,6 @@ function onButtonClick(event) {
     if(digits.includes(input)) {
         // Prevent trailing zeros
         if(input === "0" && (operators.includes(display.textContent.at(-1)) || display.textContent.length == 0 || display.textContent[0] === "0")) return;
-        console.log("digit");
         if(display.textContent.length > 0 && display.textContent[0] === "0") display.textContent = input;
         else display.textContent += input;
     }
@@ -15,16 +14,13 @@ function onButtonClick(event) {
             display.textContent = display.textContent.slice(0, -1) + input;
             return;
         }
-        console.log("operator");
         display.textContent = operate(display.textContent);
         display.textContent += input;
     }
     else if(input === "C") {
-        console.log("C");
         display.textContent = "0";
     }
     else if(input === "=") {
-        console.log("=");
         display.textContent = operate(display.textContent);
     }
 }
