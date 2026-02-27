@@ -3,12 +3,18 @@ function onButtonClick(event) {
     let input = event.target.textContent;
 
     if(digits.includes(input)) {
+        // Prevent trailing zeros
         if(input === "0" && (operators.includes(display.textContent.at(-1)) || display.textContent.length == 0 || display.textContent[0] === "0")) return;
         console.log("digit");
         if(display.textContent.length > 0 && display.textContent[0] === "0") display.textContent = input;
         else display.textContent += input;
     }
     else if(operators.includes(input)) {
+        // Handle consecutive operator selection
+        if(display.textContent.length > 0 && operators.includes(display.textContent.at(-1))) {
+            display.textContent = display.textContent.slice(0, -1) + input;
+            return;
+        }
         console.log("operator");
         display.textContent = operate(display.textContent);
         display.textContent += input;
